@@ -1,0 +1,392 @@
+{%extends "index.html"%}
+{%load static%}
+{%load mytags%}
+{%block body%}
+
+<main class="main">
+
+    <div class="site-breadcrumb" style="background: url({%static 'assets/img/breadcrumb/01.jpg'%})">
+        <div class="container">
+            <h2 class="breadcrumb-title">My Profile</h2>
+            <ul class="breadcrumb-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">My Profile</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="user-profile py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="user-profile-sidebar">
+                        <div class="user-profile-sidebar-top">
+                            <div class="user-profile-img">
+                                {%if user.pic%}
+                                <img src="{{user.pic.url}}" alt>
+                                {%else%}
+                                <img src="{%static 'assets/img/account/noimage.png'%}" alt>
+                                {%endif%}
+                                <button type="button" class="profile-img-btn"><i class="far fa-camera"></i></button>
+                                <input type="file" class="profile-img-file">
+                            </div>
+                            <h5>{{user.name}}</h5>
+                            <p>{{user.email}}</p>
+                        </div>
+                        <ul class="user-profile-sidebar-list">
+                            <li><a href="dashboard.html"><i class="far fa-gauge-high"></i> Dashboard</a></li>
+                            <li><a class="active" href="profile.html"><i class="far fa-user"></i> My Profile</a></li>
+                            <li><a href="profile-listing.html"><i class="far fa-layer-group"></i> My Listing</a></li>
+                            <li><a href="add-listing.html"><i class="far fa-plus-circle"></i> Add Listing</a></li>
+                            <li><a href="profile-favorite.html"><i class="far fa-heart"></i> My Favorites</a></li>
+                            <li><a href="profile-message.html"><i class="far fa-envelope"></i> Messages <span
+                                        class="badge badge-danger">02</span></a></li>
+                            <li><a href="profile-setting.html"><i class="far fa-gear"></i> Settings</a></li>
+                            <li><a href="#"><i class="far fa-sign-out"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="user-profile-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="user-profile-card">
+                                    <h4 class="user-profile-card-title">Profile Info</h4>
+                                    <div class="user-profile-form">
+
+                                        {%for i in messages%}
+                                        <script>
+                                            alert("{{i}}")
+                                        </script>
+                                        {%endfor%}
+
+                                        <form method="post" action="" enctype="multipart/form-data">
+                                            {%csrf_token%}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Full Name</label>
+                                                        <input type="text" class="form-control" value="{{user.name}}" name="name"
+                                                            placeholder="Full Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Username</label>
+                                                        <input type="text" class="form-control" value="{{user.username}}" name="username"
+                                                            placeholder="Username">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control"
+                                                            value="{{user.email}}" name="email" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Phone</label>
+                                                        <input type="tel" class="form-control" value="{{user.phone}}" pattern="[0-9]{10}" name="phone"
+                                                            placeholder="Phone">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>House / Building No.</label>
+                                                        <input type="text" class="form-control" value="{{user.addressline1}}" name="addressline1"
+                                                            placeholder="House / Building No.">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Street No. / Near By</label>
+                                                        <input type="text" class="form-control" value="{{user.addressline2}}" name="addressline2"
+                                                            placeholder="Street No. / Near By">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Village / Locality</label>
+                                                        <input type="text" class="form-control" value="{{user.addressline3}}" name="addressline3"
+                                                            placeholder="Village / Locality">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Pin Code</label>
+                                                        <input type="text" class="form-control" value="{{user.pin}}" name="pin"
+                                                            placeholder="Pin Code">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control" value="{{user.city}}" name="city"
+                                                            placeholder="City">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>State</label>
+                                                        <input type="text" class="form-control" value="{{user.state}}" name="state"
+                                                            placeholder="State">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Profile Image</label>
+                                                        <input type="file" class="form-control" name="pic">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="theme-btn my-3"><span
+                                                    class="far fa-user"></span> Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-5">
+                                <div class="user-profile-card">
+                                    <h4 class="user-profile-card-title">Change Password</h4>
+                                    <div class="col-lg-12">
+                                        <div class="user-profile-form">
+                                            <form action="#">
+                                                <div class="form-group">
+                                                    <label>Old Password</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Old Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="New Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Re-Type Password</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Re-Type Password">
+                                                </div>
+                                                <button type="button" class="theme-btn my-3"><span
+                                                        class="far fa-key"></span> Change Password</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-lg-12">
+                                <div class="user-profile-card profile-store">
+                                    <h4 class="user-profile-card-title">Store Info</h4>
+                                    <div class="col-lg-12">
+                                        <div class="user-profile-form">
+                                            <form action="#">
+                                                <div class="form-group">
+                                                    <div class="store-logo-preview">
+                                                        <img src="{%static 'assets/img/store/logo.jpg'%}" alt>
+                                                    </div>
+                                                    <input type="file" class="store-file">
+                                                    <button type="button" class="theme-btn store-upload"><span
+                                                            class="far fa-upload"></span> Upload Logo</button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="store-banner-preview">
+                                                        <img src="{%static 'assets/img/store/banner.jpg'%}" alt>
+                                                    </div>
+                                                    <input type="file" class="store-file">
+                                                    <button type="button" class="theme-btn store-upload mb-4"><span
+                                                            class="far fa-upload"></span> Upload Banner</button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Store Name</label>
+                                                    <input type="text" class="form-control" value="Automotive Car"
+                                                        placeholder="Store Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Contact Phone Number</label>
+                                                    <input type="text" class="form-control" value="+2 123 654 7898"
+                                                        placeholder="Contact Phone Number">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Contact Email</label>
+                                                    <input type="text" class="form-control" value="antoni@example.com"
+                                                        placeholder="Contact Email">
+                                                </div>
+                                                <button type="button" class="theme-btn my-3"><span
+                                                        class="far fa-save"></span> Save Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shop-cart py-120">
+        <div class="container">
+            <h2>Wishlist Section</h2>
+            <div class="shop-cart-wrapper my-5">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {%for i in wishlist%}
+                                <tr>
+                                    <td>
+                                        <div class="cart-img">
+                                            <img src="{{i.product.pic1.url}}" alt>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>{{i.product.name}}</h5>
+                                    </td>
+                                    <td>
+                                        <div class="cart-price">
+                                            <span>&#8377 {{i.product.finalprice}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="/shop-single/{{i.product.id}}" class="cart-remove"><i class="far fa-cart-plus"></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="/delete-wishlist/{{i.product.id}}" class="cart-remove"><i class="far fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            {%endfor%}
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="shop-cart py-120">
+        <div class="container">
+            <h2>Order History Section</h2>
+            <div class="row my-3">
+                {%for item in orders%}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-5">
+                    <div class="table-resposive">
+                        <table>
+                            <tr>
+                                <th>Checkout Id</th>
+                                <td>{{item.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Payment Mode</th>
+                                <td>{{item.paymentmode}}</td>
+                            </tr>
+                            <tr>
+                                <th>Payment Status</th>
+                                <td>{{item.paymentstatus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Order Status</th>
+                                <td>{{item.orderstatus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td>&#8377 {{item.total}}</td>
+                            </tr>
+                            <tr>
+                                <th>Shipping</th>
+                                <td>&#8377 {{item.shipping}}</td>
+                            </tr>
+                            <tr>
+                                <th>Final</th>
+                                <td>&#8377 {{item.final}}</td>
+                            </tr>
+                            <tr>
+                                <th>Razor Pay Payment Id</th>
+                                <td>{{item.rppid}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-4 col-sm-6 col-12 my-5">
+                    <div class="shop-cart-wrapper">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>MainCategory</th>
+                                        <th>Subcategory</th>
+                                        <th>Brand</th>
+                                        <th>Size</th>
+                                        <th>Color</th>
+                                        <th>Price</th>
+                                        <th>QTY</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        
+                                    {%for i in wishlist%}
+                                        <tr>
+                                            <td>
+                                                <div class="cart-img">
+                                                    <img src="{{i.product.pic1.url}}" alt>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.name}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.maincategory}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.subcategory}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.brand}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.color}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.size}}</h5>
+                                            </td>
+                                            <td>
+                                                <div class="cart-price">
+                                                    <span>&#8377 {{i.product.finalprice}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.qty}}</h5>
+                                            </td>
+                                            <td>
+                                                <h5>{{i.product.total}}</h5>
+                                            </td>
+                                        </tr>
+                                    {%endfor%}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 5px solid grey;">
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+
+</main>
+{%endblock%}
